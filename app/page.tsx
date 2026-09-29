@@ -604,7 +604,7 @@ function Membership() {
 ───────────────────────────────────────────── */
 function Founders() {
   const founders = [
-    { name: "Andy Monroe", title: "Co-Founder", img: "/images/founder-andy.jpeg" },
+    { name: "Christian Massey", title: "Co-Founder", img: "/images/founder-christian.webp" },
     { name: "Jantz Tostenson", title: "Co-Founder", img: "/images/founder-jantz.jpeg" },
   ];
 
