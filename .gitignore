@@ -1,0 +1,11 @@
+node_modules/
+.next/
+.env*
+.vercel/
+.DS_Store
+
+# Raw/reference assets not used directly by the site
+/Founders/
+/Pictures/
+/Background video/
+/facility section pictures/

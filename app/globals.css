@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
+
+:root {
+  --font-inter: 'Inter', system-ui, sans-serif;
+  --font-bebas: 'Bebas Neue', system-ui, sans-serif;
+  --font-playfair: 'Playfair Display', Georgia, serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #1c4231;
+  color: #f5f0e8;
+  font-family: var(--font-inter);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a1f15; }
+::-webkit-scrollbar-thumb { background: #000; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #f5f0e8; }
+
+/* Cream text utility */
+.neon-text {
+  color: #f5f0e8;
+}
+
+/* Primary button — cream bg, forest green text */
+.btn-primary {
+  position: relative;
+  background: #f5f0e8;
+  color: #1c4231;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #e8e3db;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-primary:hover::before { opacity: 1; }
+
+.btn-primary span { position: relative; z-index: 1; }
+
+/* Ghost button — black border, cream text */
+.btn-ghost {
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  color: #f5f0e8;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.btn-ghost:hover {
+  border-color: #000;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Stat card */
+.stat-card {
+  background: #14301f;
+  border: 1px solid #000;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  transition: all 0.4s ease;
+}
+
+.stat-card:hover {
+  background: #1e4a32;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Feature card */
+.feature-card {
+  background: #14301f;
+  border: 1px solid #000;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card:hover {
+  background: #1e4a32;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* Glow helpers (repurposed as subtle shadows) */
+.glow-blue {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.glow-green {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Divider line */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.6), transparent);
+}
+
+/* Section fade animation */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children */
+.stagger > *:nth-child(1) { transition-delay: 0ms; }
+.stagger > *:nth-child(2) { transition-delay: 100ms; }
+.stagger > *:nth-child(3) { transition-delay: 200ms; }
+.stagger > *:nth-child(4) { transition-delay: 300ms; }
+.stagger > *:nth-child(5) { transition-delay: 400ms; }
+.stagger > *:nth-child(6) { transition-delay: 500ms; }
+
+/* Membership card — black border */
+.membership-card {
+  background: #14301f;
+  border: 1px solid #000;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* Nav — always black */
+.nav-blur {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(0, 0, 0, 0.9);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+}
