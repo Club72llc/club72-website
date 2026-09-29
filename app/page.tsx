@@ -4,6 +4,9 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+// TODO: replace with the real payment/signup link once it exists
+const JOIN_NOW_URL = "https://replace-with-join-now-link.example.com";
+
 /* ─────────────────────────────────────────────
    ICONS
 ───────────────────────────────────────────── */
@@ -135,6 +138,12 @@ function Nav() {
               {item}
             </a>
           ))}
+          <a
+            href={JOIN_NOW_URL}
+            className="btn-primary px-5 py-2.5 rounded-md text-sm font-semibold"
+          >
+            Join Now
+          </a>
         </div>
 
         {/* Mobile hamburger */}
@@ -171,6 +180,13 @@ function Nav() {
                 {item}
               </a>
             ))}
+            <a
+              href={JOIN_NOW_URL}
+              onClick={() => setMenuOpen(false)}
+              className="neon-text font-semibold tracking-wide py-1"
+            >
+              Join Now
+            </a>
             <a
               href="#membership"
               onClick={() => setMenuOpen(false)}
