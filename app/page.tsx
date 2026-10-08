@@ -421,9 +421,9 @@ function Facility() {
   const photos = [
     { src: "/images/gallery-1.jpg", alt: "Club 72 building exterior at sunset" },
     { src: "/images/gallery-2.jpg", alt: "Club 72 gym floor with barbell racks" },
-    { src: "/images/gallery-3.jpg", alt: "Club 72 golf simulator bay" },
+    { src: "/images/sim-bar.jpg", alt: "Club 72 golf simulator bay" },
     { src: "/images/gallery-4.jpg", alt: "Club 72 gym floor with treadmills" },
-    { src: "/images/gallery-5.jpg", alt: "Club 72 golf simulator screen" },
+    { src: "/images/sim-screen.jpg", alt: "Club 72 golf simulator screen" },
     { src: "/images/gallery-6.jpg", alt: "Club 72 indoor putting green" },
     { src: "/images/gallery-7.jpg", alt: "Club 72 selectorized strength machines" },
     { src: "/images/gallery-8.jpg", alt: "Club 72 strength training area" },
