@@ -419,11 +419,14 @@ function StatsBar() {
 ───────────────────────────────────────────── */
 function Facility() {
   const photos = [
-    { src: "/images/fac-aerial.png", alt: "Club 72 facility aerial view" },
-    { src: "/images/fac-1.jpg", alt: "Club 72 facility" },
-    { src: "/images/fac-2.png", alt: "Club 72 facility" },
-    { src: "/images/fac-3.jpg", alt: "Club 72 facility" },
-    { src: "/images/fac-simulators.png", alt: "Club 72 simulators" },
+    { src: "/images/gallery-1.jpg", alt: "Club 72 building exterior at sunset" },
+    { src: "/images/gallery-2.jpg", alt: "Club 72 gym floor with barbell racks" },
+    { src: "/images/gallery-3.jpg", alt: "Club 72 golf simulator bay" },
+    { src: "/images/gallery-4.jpg", alt: "Club 72 gym floor with treadmills" },
+    { src: "/images/gallery-5.jpg", alt: "Club 72 golf simulator screen" },
+    { src: "/images/gallery-6.jpg", alt: "Club 72 indoor putting green" },
+    { src: "/images/gallery-7.jpg", alt: "Club 72 selectorized strength machines" },
+    { src: "/images/gallery-8.jpg", alt: "Club 72 strength training area" },
   ];
 
   return (
@@ -434,17 +437,18 @@ function Facility() {
       >
         Coming Soon To Southern Oregon...
       </h2>
-      <div className="grid grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
         {photos.map((p, i) => (
           <div
             key={i}
-            className={`relative rounded-xl overflow-hidden aspect-[4/3] animate-on-scroll col-span-6 ${i < 2 ? "md:col-span-3" : "md:col-span-2"}`}
-            style={{ transitionDelay: `${i * 100}ms` }}
+            className="relative rounded-xl overflow-hidden aspect-[3/4] animate-on-scroll"
+            style={{ transitionDelay: `${(i % 4) * 100}ms` }}
           >
             <Image
               src={p.src}
               alt={p.alt}
               fill
+              sizes="(min-width: 1152px) 280px, (min-width: 768px) 25vw, 50vw"
               className="object-cover hover:scale-105 transition-transform duration-700"
             />
           </div>
