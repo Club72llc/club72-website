@@ -5,6 +5,22 @@ import { useEffect, useState } from "react";
 
 const JOIN_NOW_URL = "https://app.getopencourt.com/club/club-72/memberships";
 
+// Paste the Calendly or Cal.com booking link here. While empty, the tour button stays hidden.
+const TOUR_BOOKING_URL = "";
+
+function tourEmbedUrl(url: string) {
+  const u = new URL(url);
+  if (u.hostname.endsWith("calendly.com")) {
+    u.searchParams.set("embed_type", "Inline");
+    if (typeof window !== "undefined") u.searchParams.set("embed_domain", window.location.hostname);
+    u.searchParams.set("hide_gdpr_banner", "1");
+  } else {
+    u.searchParams.set("embed", "true");
+    u.searchParams.set("theme", "light");
+  }
+  return u.toString();
+}
+
 /* ─────────────────────────────────────────────
    ICONS
 ───────────────────────────────────────────── */
@@ -95,9 +111,65 @@ function useScrollReveal() {
 /* ─────────────────────────────────────────────
    NAV
 ───────────────────────────────────────────── */
+function TourModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-0 md:p-6"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Schedule a tour"
+      onClick={onClose}
+    >
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+      <div
+        className="relative w-full h-full md:h-[min(92vh,760px)] md:max-w-3xl bg-brand-surface md:rounded-2xl overflow-hidden shadow-2xl flex flex-col"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between px-5 py-3 border-b border-black/30">
+          <h3
+            className="text-lg md:text-xl font-bold text-brand-cream"
+            style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+          >
+            Schedule a Tour
+          </h3>
+          <button
+            onClick={onClose}
+            aria-label="Close"
+            className="p-2 -mr-2 text-brand-muted hover:text-brand-cream transition-colors"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-5 h-5">
+              <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" />
+            </svg>
+          </button>
+        </div>
+        <iframe
+          src={tourEmbedUrl(TOUR_BOOKING_URL)}
+          title="Schedule a tour of Club 72"
+          className="flex-1 w-full bg-white"
+        />
+      </div>
+    </div>
+  );
+}
+
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [tourOpen, setTourOpen] = useState(false);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 40);
@@ -106,6 +178,7 @@ function Nav() {
   }, []);
 
   return (
+    <>
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black border-b border-black/30">
       <div className="max-w-6xl mx-auto px-5 md:px-6 flex items-center justify-between py-3 md:py-4">
         {/* Logo */}
@@ -120,7 +193,7 @@ function Nav() {
         </a>
 
         {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-8">
           {["Facility", "Amenities", "Membership"].map((item) => (
             <a
               key={item}
@@ -132,15 +205,36 @@ function Nav() {
           ))}
           <a
             href={JOIN_NOW_URL}
-            className="btn-primary px-5 py-2.5 rounded-md text-sm font-semibold"
+            className={
+              TOUR_BOOKING_URL
+                ? "px-5 py-2.5 rounded-md text-sm font-semibold border border-brand-cream/60 text-brand-cream hover:bg-brand-cream/10 transition-colors"
+                : "btn-primary px-5 py-2.5 rounded-md text-sm font-semibold"
+            }
           >
             Join Now
           </a>
+          {TOUR_BOOKING_URL && (
+            <button
+              onClick={() => setTourOpen(true)}
+              className="btn-primary px-5 py-2.5 rounded-md text-sm font-bold"
+            >
+              Schedule a Tour!
+            </button>
+          )}
         </div>
 
-        {/* Mobile hamburger */}
+        {/* Mobile tour button + hamburger */}
+        <div className="lg:hidden flex items-center gap-2">
+        {TOUR_BOOKING_URL && (
+          <button
+            onClick={() => setTourOpen(true)}
+            className="btn-primary px-3.5 py-2 rounded-md text-xs font-bold whitespace-nowrap"
+          >
+            Schedule a Tour!
+          </button>
+        )}
         <button
-          className="md:hidden p-2 -mr-2 text-brand-neon"
+          className="p-2 -mr-2 text-brand-neon"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
@@ -156,11 +250,12 @@ function Nav() {
             )}
           </svg>
         </button>
+        </div>
       </div>
 
       {/* Mobile menu dropdown */}
       {menuOpen && (
-        <div className="md:hidden bg-black border-t border-black/30">
+        <div className="lg:hidden bg-black border-t border-black/30">
           <div className="max-w-6xl mx-auto px-5 py-5 flex flex-col gap-4">
             {["Facility", "Amenities", "Membership"].map((item) => (
               <a
@@ -179,10 +274,23 @@ function Nav() {
             >
               <span>Join Now</span>
             </a>
+            {TOUR_BOOKING_URL && (
+              <button
+                onClick={() => {
+                  setMenuOpen(false);
+                  setTourOpen(true);
+                }}
+                className="px-5 py-3.5 rounded-md text-sm text-center font-semibold border border-brand-cream/60 text-brand-cream"
+              >
+                Schedule a Tour!
+              </button>
+            )}
           </div>
         </div>
       )}
     </nav>
+    {TOUR_BOOKING_URL && <TourModal open={tourOpen} onClose={() => setTourOpen(false)} />}
+    </>
   );
 }
 
