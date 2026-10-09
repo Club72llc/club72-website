@@ -4,8 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-// TODO: replace with the real payment/signup link once it exists
-const JOIN_NOW_URL = "https://replace-with-join-now-link.example.com";
+const JOIN_NOW_URL = "https://app.getopencourt.com/club/club-72/memberships";
 
 /* ─────────────────────────────────────────────
    ICONS
