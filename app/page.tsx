@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const JOIN_NOW_URL = "https://app.getopencourt.com/club/club-72/memberships";
@@ -66,12 +65,6 @@ const IconStar = () => (
 const IconCheck = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-5 h-5">
     <path d="M20 6L9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-
-const IconArrow = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-4 h-4 flex-shrink-0">
-    <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
@@ -182,157 +175,14 @@ function Nav() {
             <a
               href={JOIN_NOW_URL}
               onClick={() => setMenuOpen(false)}
-              className="neon-text font-semibold tracking-wide py-1"
-            >
-              Join Now
-            </a>
-            <a
-              href="#membership"
-              onClick={() => setMenuOpen(false)}
               className="btn-primary px-5 py-3.5 rounded-md text-sm text-center mt-1"
             >
-              <span>Click Here To Save Your Spot</span>
+              <span>Join Now</span>
             </a>
           </div>
         </div>
       )}
     </nav>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   NOTIFY ME MODAL
-───────────────────────────────────────────── */
-function NotifyModal({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const router = useRouter();
-  const [form, setForm] = useState({ firstName: "", lastName: "", email: "", phone: "" });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
-    try {
-      const res = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      if (!res.ok) throw new Error("Failed");
-      router.push("/thank-you");
-    } catch {
-      setError("Something went wrong. Please try again.");
-      setLoading(false);
-    }
-  };
-
-  if (!open) return null;
-
-  return (
-    <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
-      onClick={onClose}
-    >
-      {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
-
-      {/* Modal */}
-      <div
-        className="relative w-full max-w-md bg-brand-surface border border-black/40 rounded-2xl p-7 md:p-9 shadow-2xl"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Close */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-brand-muted hover:text-brand-cream transition-colors"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-5 h-5">
-            <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" />
-          </svg>
-        </button>
-
-        <>
-            <h3 className="text-2xl font-bold text-brand-cream mb-1" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
-              Click Here To Save Your Spot
-            </h3>
-            <p className="text-brand-muted text-sm mb-6">Only 150 spots available. Be first in line.</p>
-
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-              <div className="flex gap-3">
-                <div className="flex-1">
-                  <label className="block text-xs text-brand-muted mb-1.5 font-semibold uppercase tracking-wide">First Name</label>
-                  <input
-                    type="text"
-                    required
-                    value={form.firstName}
-                    onChange={(e) => setForm({ ...form, firstName: e.target.value })}
-                    placeholder="John"
-                    className="w-full px-3.5 py-3 rounded-md bg-black/20 border border-black/40 text-brand-cream placeholder:text-brand-muted/50 text-sm focus:outline-none focus:border-brand-cream/40"
-                  />
-                </div>
-                <div className="flex-1">
-                  <label className="block text-xs text-brand-muted mb-1.5 font-semibold uppercase tracking-wide">Last Name</label>
-                  <input
-                    type="text"
-                    required
-                    value={form.lastName}
-                    onChange={(e) => setForm({ ...form, lastName: e.target.value })}
-                    placeholder="Smith"
-                    className="w-full px-3.5 py-3 rounded-md bg-black/20 border border-black/40 text-brand-cream placeholder:text-brand-muted/50 text-sm focus:outline-none focus:border-brand-cream/40"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-xs text-brand-muted mb-1.5 font-semibold uppercase tracking-wide">Email</label>
-                <input
-                  type="email"
-                  required
-                  value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  placeholder="john@example.com"
-                  className="w-full px-3.5 py-3 rounded-md bg-black/20 border border-black/40 text-brand-cream placeholder:text-brand-muted/50 text-sm focus:outline-none focus:border-brand-cream/40"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs text-brand-muted mb-1.5 font-semibold uppercase tracking-wide">Phone</label>
-                <input
-                  type="tel"
-                  required
-                  value={form.phone}
-                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                  placeholder="(541) 555-0100"
-                  className="w-full px-3.5 py-3 rounded-md bg-black/20 border border-black/40 text-brand-cream placeholder:text-brand-muted/50 text-sm focus:outline-none focus:border-brand-cream/40"
-                />
-              </div>
-
-              {error && <p className="text-red-400 text-sm text-center">{error}</p>}
-              <button
-                type="submit"
-                disabled={loading}
-                className="btn-primary w-full py-4 rounded-md text-sm font-bold flex items-center gap-2 justify-center mt-1 disabled:opacity-60"
-              >
-                <span>{loading ? "Submitting..." : "Click Here To Save Your Spot"}</span>
-                {!loading && <IconArrow />}
-              </button>
-            </form>
-          </>
-      </div>
-    </div>
-  );
-}
-
-function NotifyButton({ label = "Click Here To Save Your Spot", className = "" }: { label?: string; className?: string }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <>
-      <button onClick={() => setOpen(true)} className={className}>
-        {label}
-      </button>
-      <NotifyModal open={open} onClose={() => setOpen(false)} />
-    </>
   );
 }
 
@@ -368,10 +218,12 @@ function Hero() {
 
         {/* CTA */}
         <div className="flex justify-center w-full px-2">
-          <NotifyButton
-            label="Click Here To Save Your Spot"
+          <a
+            href={JOIN_NOW_URL}
             className="btn-primary px-6 md:px-8 py-4 rounded-md text-sm md:text-base font-bold flex items-center gap-2"
-          />
+          >
+            Join Now
+          </a>
         </div>
       </div>
 
@@ -580,7 +432,7 @@ function Membership() {
             </div>
             <p className="text-brand-muted text-xs uppercase tracking-widest font-semibold mb-4">Pre-Launch Pricing</p>
             <p className="text-brand-muted text-sm leading-relaxed">
-              We will be doing a pre-launch sale for $99/month. Only 50 spots will be available at this price. Once they are gone, we will jump up to $135/month. Opt in now to save your spot at the $99/month price point. No payment will be collected when you opt in.
+              We will be doing a pre-launch sale for $99/month. Only 50 spots will be available at this price. Once they are gone, we will jump up to $135/month. Join now to lock in the $99/month price point.
             </p>
           </div>
 
@@ -600,12 +452,14 @@ function Membership() {
 
           {/* CTA */}
           <div className="flex flex-col items-center gap-3">
-            <NotifyButton
-              label="Click Here To Save Your Spot"
+            <a
+              href={JOIN_NOW_URL}
               className="btn-primary px-8 py-4 rounded-md text-sm font-bold flex items-center gap-2"
-            />
+            >
+              Join Now
+            </a>
             <p className="text-brand-muted text-xs text-center max-w-xs">
-              Opting in saves your spot for pre-launch pricing. First come, first serve.
+              Joining locks in pre-launch pricing. First come, first serve.
             </p>
           </div>
         </div>
