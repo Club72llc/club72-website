@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 const JOIN_NOW_URL = "https://app.getopencourt.com/club/club-72/memberships";
 
 // Paste the Calendly or Cal.com booking link here. While empty, the tour button stays hidden.
-const TOUR_BOOKING_URL = "";
+const TOUR_BOOKING_URL = "https://calendly.com/club72llc/club-72-tour";
 
 function tourEmbedUrl(url: string) {
   const u = new URL(url);
