@@ -715,8 +715,8 @@ function Footer() {
 
             <div>
               <div className="text-xs font-semibold text-brand-muted uppercase tracking-widest mb-1 md:mb-3">Location</div>
-              <p className="text-brand-muted text-sm mb-1">Southern Oregon</p>
-              <p className="text-brand-muted text-sm mb-3 md:mb-4">Address coming soon</p>
+              <p className="text-brand-muted text-sm">3855 Crater Lake Hwy</p>
+              <p className="text-brand-muted text-sm mb-3 md:mb-4">Medford, OR 97504</p>
               <a
                 href="mailto:club72llc@gmail.com"
                 className="text-brand-cream text-sm hover:text-brand-text transition-colors break-all"
