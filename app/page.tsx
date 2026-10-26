@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const JOIN_NOW_URL = "https://app.getopencourt.com/club/club-72/memberships";
 
@@ -300,12 +300,70 @@ function Nav() {
    Plain JSX lets hydration reuse the existing DOM node
    so iOS never gets a second autoplay block.
 ───────────────────────────────────────────── */
+const HERO_CLIPS = [
+  { src: "/videos/hero-1.mp4", poster: "/videos/hero-1.jpg", focus: "50% 45%" },
+  { src: "/videos/hero-2.mp4", poster: "/videos/hero-2.jpg", focus: "50% 55%" },
+  { src: "/videos/hero-3.mp4", poster: "/videos/hero-3.jpg", focus: "50% 55%" },
+  { src: "/videos/hero-4.mp4", poster: "/videos/hero-4.jpg", focus: "50% 40%" },
+  { src: "/videos/hero-5.mp4", poster: "/videos/hero-5.jpg", focus: "50% 35%" },
+];
+
+function HeroVideos() {
+  const [active, setActive] = useState(0);
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const refs = useRef<(HTMLVideoElement | null)[]>([]);
+  const next = (active + 1) % HERO_CLIPS.length;
+
+  useEffect(() => {
+    setReduceMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
+
+  useEffect(() => {
+    if (reduceMotion) {
+      refs.current.forEach((o) => o?.pause());
+      return;
+    }
+    const v = refs.current[active];
+    if (!v) return;
+    v.currentTime = 0;
+    v.play().catch(() => {});
+    refs.current.forEach((o, i) => i !== active && o?.pause());
+  }, [active, reduceMotion]);
+
+  return (
+    <div className="absolute inset-0 bg-black" aria-hidden="true">
+      {HERO_CLIPS.map((c, i) => (
+        <video
+          key={c.src}
+          ref={(el) => {
+            refs.current[i] = el;
+          }}
+          src={c.src}
+          poster={c.poster}
+          muted
+          playsInline
+          autoPlay={i === 0}
+          preload={i === active || i === next ? "auto" : "none"}
+          onEnded={() => i === active && setActive(next)}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+            i === active ? "opacity-100" : "opacity-0"
+          }`}
+          style={{ objectPosition: c.focus }}
+        />
+      ))}
+      <div className="absolute inset-0 bg-black/60" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
+    </div>
+  );
+}
+
 function Hero() {
   return (
     <section className="relative min-h-[100svh] flex flex-col overflow-hidden">
+      <HeroVideos />
 
       {/* Content — vertically centered below the fixed nav */}
-      <div className="flex-1 flex flex-col items-center justify-center px-5 md:px-6 text-center pt-24 pb-10 md:pt-10 md:pb-10">
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-5 md:px-6 text-center pt-24 pb-10 md:pt-10 md:pb-10">
         {/* Badge */}
         <div className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl border border-black/30 bg-brand-dark/50 text-brand-cream text-xs md:text-sm font-bold tracking-normal mb-6 md:mb-8 backdrop-blur-sm max-w-[340px] md:max-w-none text-center">
           <span className="w-2 h-2 rounded-full bg-brand-cream animate-pulse flex-shrink-0" />
