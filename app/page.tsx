@@ -449,11 +449,14 @@ function Facility() {
   return (
     <section id="facility" className="py-16 md:py-28 px-4 md:px-6 max-w-6xl mx-auto">
       <h2
-        className="text-3xl md:text-5xl font-bold text-center neon-text mb-8 md:mb-12 animate-on-scroll"
+        className="text-3xl md:text-5xl font-bold text-center neon-text mb-3 md:mb-4 animate-on-scroll"
         style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
       >
-        Coming Soon To Southern Oregon...
+        Now Open, Come Check Us Out
       </h2>
+      <p className="text-center text-brand-muted text-base md:text-xl mb-8 md:mb-12 animate-on-scroll">
+        3855 Crater Lake Hwy, Medford, OR 97504
+      </p>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
         {photos.map((p, i) => (
           <div
