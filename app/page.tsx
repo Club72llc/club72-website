@@ -404,7 +404,7 @@ function StatsBar() {
   const stats = [
     { value: "3", label: "Premium Simulator Bays", icon: <IconTarget /> },
     { value: "24/7", label: "Member Access", icon: <IconClock /> },
-    { value: "150", label: "Spots Available", icon: <IconUsers /> },
+    { value: "70", label: "Spots Remaining", icon: <IconUsers /> },
   ];
 
   return (

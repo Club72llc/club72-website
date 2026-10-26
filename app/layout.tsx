@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Club 72 | Southern Oregon's Golf + Gym",
   description:
-    "Southern Oregon's only Golf + Gym facility. 3 Trackman simulator bays, 24/7 access, and only 150 spots available. Elevate your game and your gains.",
+    "Southern Oregon's only Golf + Gym facility. 3 Trackman simulator bays, 24/7 access, and only 70 spots remaining. Elevate your game and your gains.",
   keywords: [
     "golf gym",
     "indoor golf",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Club 72 | Southern Oregon's Golf + Gym",
     description:
-      "Southern Oregon's only Golf + Gym facility. 3 Trackman simulator bays, 24/7 access, and only 150 spots available.",
+      "Southern Oregon's only Golf + Gym facility. 3 Trackman simulator bays, 24/7 access, and only 70 spots remaining.",
     type: "website",
   },
 };
