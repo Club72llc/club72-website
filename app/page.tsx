@@ -378,14 +378,14 @@ function StatsBar() {
 ───────────────────────────────────────────── */
 function Facility() {
   const photos = [
-    { src: "/images/gallery-1.jpg", alt: "Club 72 building exterior at sunset" },
-    { src: "/images/gallery-2.jpg", alt: "Club 72 gym floor with barbell racks" },
-    { src: "/images/sim-bar.jpg", alt: "Club 72 golf simulator bay" },
-    { src: "/images/gallery-4.jpg", alt: "Club 72 gym floor with treadmills" },
-    { src: "/images/sim-screen.jpg", alt: "Club 72 golf simulator screen" },
-    { src: "/images/gallery-6.jpg", alt: "Club 72 indoor putting green" },
-    { src: "/images/gallery-7.jpg", alt: "Club 72 selectorized strength machines" },
-    { src: "/images/gallery-8.jpg", alt: "Club 72 strength training area" },
+    { src: "/images/gallery-v2-1.jpg", alt: "Club 72 building exterior at sunset" },
+    { src: "/images/gallery-v2-2.jpg", alt: "Club 72 golf simulator bay with bar seating" },
+    { src: "/images/gallery-v2-3.jpg", alt: "Club 72 free weights and dumbbell racks" },
+    { src: "/images/gallery-v2-4.jpg", alt: "Club 72 golf simulator bay and lounge" },
+    { src: "/images/gallery-v2-5.jpg", alt: "Club 72 golf simulator with lounge chair" },
+    { src: "/images/gallery-v2-6.jpg", alt: "Club 72 indoor putting green" },
+    { src: "/images/gallery-v2-7.jpg", alt: "Club 72 golf simulator screen" },
+    { src: "/images/gallery-v2-8.jpg", alt: "Club 72 strength machines and power racks" },
   ];
 
   return (
