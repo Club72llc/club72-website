@@ -560,12 +560,14 @@ function Amenities() {
 ───────────────────────────────────────────── */
 function Membership() {
   const included = [
-    "24/7 Access",
-    "Premium Golf Simulators",
-    "Full Gym",
-    "Indoor Putting Green",
-    "Private Community Events, Tournaments, Giveaways, Etc",
-    "6-Month Commitment",
+    "24/7 facility access",
+    "Unlimited golf simulator sessions (subject to availability)",
+    "Access to all 3 premium golf simulator bays",
+    "Full fitness center with strength and cardio equipment",
+    "Indoor putting green",
+    "Comfortable member lounge",
+    "Book simulator sessions up to 14 days in advance",
+    "Maximum 2 hours per simulator reservation",
   ];
 
   return (
@@ -580,12 +582,12 @@ function Membership() {
             className="text-4xl md:text-5xl font-bold neon-text"
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
-            The Membership
+            Club Pro Membership
           </h2>
         </div>
 
         <div className="membership-card rounded-2xl p-6 md:p-12 animate-on-scroll">
-          {/* Pre-launch price */}
+          {/* Price */}
           <div className="mb-8 md:mb-10 pb-8 md:pb-10 border-b border-black/20">
             <div className="flex items-end gap-2 mb-1">
               <span
@@ -596,14 +598,15 @@ function Membership() {
               </span>
               <span className="text-brand-muted pb-2 text-base md:text-lg">/month</span>
             </div>
-            <p className="text-brand-muted text-xs uppercase tracking-widest font-semibold mb-4">Pre-Launch Pricing</p>
+            <p className="text-brand-muted text-xs uppercase tracking-widest font-semibold mb-4">Club Pro</p>
             <p className="text-brand-muted text-sm leading-relaxed">
-              We will be doing a pre-launch sale for $99/month. Only 50 spots will be available at this price. Once they are gone, we will jump up to $135/month. Join now to lock in the $99/month price point.
+              Enjoy unlimited access to Club 72 with our Club Pro membership. Designed for golfers and fitness enthusiasts, this membership gives you everything you need to practice, play, train, and improve your game—all in one facility.
             </p>
           </div>
 
           {/* Included items */}
           <div className="mb-8 md:mb-10">
+            <p className="text-brand-muted text-xs uppercase tracking-widest font-semibold mb-5">Membership Benefits</p>
             <div className="flex flex-col gap-4">
               {included.map((item) => (
                 <div key={item} className="flex items-start gap-3">
@@ -624,9 +627,6 @@ function Membership() {
             >
               Join Now
             </a>
-            <p className="text-brand-muted text-xs text-center max-w-xs">
-              Joining locks in pre-launch pricing. First come, first serve.
-            </p>
           </div>
         </div>
       </div>
